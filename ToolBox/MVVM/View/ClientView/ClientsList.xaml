@@ -1,0 +1,136 @@
+﻿<Window x:Class="Praca_Inżynierska_v1.MVVM.View.ClientsList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Height="800" Width="1350"
+        ResizeMode="NoResize"
+        Background="#EAF4FF"
+        WindowStyle="None">
+
+    <Grid MouseDown="DragWindow">
+
+        
+        
+        <!-- Pasek górny -->
+        <Grid Background="#1F468F" Height="40" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Lista Klientów"
+                       FontSize="15"
+                       FontFamily="Candara"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="10,0"
+                       Foreground="White" />
+
+            <!-- Minimalizacja -->
+            <Button Name="MinimazeButton"
+                    Grid.Column="1"
+                    Margin="12"
+                    BorderBrush="Yellow"
+                    Click="MinimazeButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Button Images/minimize.png"/>
+                </Button.Background>
+            </Button>
+
+            <!-- Maksymalizacja -->
+            <Button Name="MaximizeButton"
+                    Grid.Column="2"
+                    Margin="12"
+                    BorderBrush="Green"
+                    Click="MaximizeButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Button Images/maximize.png"/>
+                </Button.Background>
+            </Button>
+
+            <!-- Zamknięcie -->
+            <Button Name="CloseButton"
+                    Grid.Column="3"
+                    Margin="12"
+                    BorderBrush="Red"
+                    Click="CloseButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Button Images/close.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+        <!-- Zawartość -->
+        <Grid Margin="0,40,0,0">
+            <StackPanel Margin="20">
+
+                <TextBlock Text="Lista Klientów"
+                           FontSize="30"
+                           FontFamily="Candara"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,10"/>
+
+                <!-- wyszukiwanie -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBox Width="200"
+                             Margin="0,0,10,0"
+                             Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Wyszukaj"
+                            Command="{Binding SearchCommand}"
+                            Width="80"/>
+                </StackPanel>
+
+                <!-- DataGrid z listą klientów -->
+                <DataGrid x:Name="ClientsDataGrid"
+                          ItemsSource="{Binding FilteredClients}"
+                          SelectedItem="{Binding SelectedClient}"
+                          IsReadOnly="False"
+                          AutoGenerateColumns="False"
+                          AlternatingRowBackground="#F0F8FF"
+                          GridLinesVisibility="Horizontal"
+                          FontFamily="Arial"
+                          FontSize="14"
+                          Margin="0,0,0,10"
+                          ColumnWidth="*"
+                          CanUserResizeColumns="False"
+                          CanUserReorderColumns="False">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Typ" Binding="{Binding ClientType}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Firma" Binding="{Binding CompanyName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="NIP" Binding="{Binding NIP}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- Panel przycisków -->
+                <StackPanel x:Name="EditClientPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Pokaż szczegóły"
+                            Command="{Binding ShowDetailsCommand}"
+                            Width="120" />
+                    <Button Content="Dodaj klienta"
+                            Command="{Binding AddClientCommand}"
+                            Width="120"
+                            Margin="0,0,10,0"
+                            Visibility="{Binding CanAddClient, Converter={StaticResource VisibilityConverter}}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

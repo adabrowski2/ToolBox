@@ -1,0 +1,85 @@
+﻿<Window x:Class="Praca_Inżynierska_v1.MVVM.View.DeliveryOrderView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Nowe zamówienie dostawy"
+        Height="420" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#EAF4FF"
+        WindowStyle="None"
+        FontFamily="Arial">
+
+    <Grid>
+        <Grid Background="#1F468F" Height="40" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Nowe zamówienie dostawy"
+                       FontSize="15"
+                       FontWeight="Normal"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="10,0"
+                       Foreground="White"/>
+        </Grid>
+
+        <Grid Margin="0,40,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Dodaj pozycje do dostawy"
+                       Grid.Row="0"
+                       FontSize="24"
+                       HorizontalAlignment="Center"
+                       Padding="10"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="30,0,0,10">
+                <ComboBox Width="300"
+                          ItemsSource="{Binding Products}"
+                          SelectedItem="{Binding SelectedProduct}"
+                          DisplayMemberPath="Name"/>
+
+                <Button Content="Dodaj"
+                        Width="80"
+                        Margin="20,0,0,0"
+                        Command="{Binding AddItemCommand}"
+                        Background="#1F468F"
+                        Foreground="White"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="2"
+                      ItemsSource="{Binding ItemsList}"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="Column"
+                      CanUserAddRows="False"
+                      Margin="30,0"
+                      Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Produkt" Binding="{Binding Name}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,30,20">
+                <Button Content="Zatwierdź"
+                        Width="100"
+                        Margin="5"
+                        Command="{Binding ConfirmCommand}"
+                        Background="#1F468F"
+                        Foreground="White"/>
+
+                <Button Content="Anuluj"
+                        Width="100"
+                        Margin="5"
+                        Command="{Binding CancelCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

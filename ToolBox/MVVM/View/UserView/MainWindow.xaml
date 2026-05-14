@@ -1,0 +1,161 @@
+﻿<Window x:Class="Praca_Inżynierska_v1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Praca_Inżynierska_v1"
+        mc:Ignorable="d"
+         
+        Height="600" Width="920"
+        ResizeMode="NoResize"
+        Background="#EAF4FF"
+        WindowStyle="None">
+
+    <Grid MouseDown="DragWindow">
+
+        <Grid Background="#1F468F" Height="40"
+              HorizontalAlignment="Stretch" VerticalAlignment="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Text="Okno główne"
+                FontSize="15"
+                FontFamily="Arial"
+                FontWeight="Normal"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Left" 
+                Margin="10,0" 
+                Foreground="White"/>
+
+            <Button Name="MinimazeButton"
+                    Grid.Column="2"
+                    Margin="12,12,12,12"        
+                    BorderBrush="Yellow"
+                    Click="MinimazeButton_Click">
+
+                <Button.Background>
+                    <ImageBrush ImageSource="/Button Images/minimize.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button Name="CloseButton"                                      
+                    Grid.Column="4"
+                    Margin="12,12,12,12"
+                    BorderBrush="Red"
+                    Click="CloseButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Button Images/close.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button Name="MaximizeButton"
+                    Grid.Column="3"
+                    Margin="12,12,12,12"
+                    BorderBrush="Green"
+                    Click="MaximizeButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Button Images/maximize.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+        <Grid Margin="0,30,0,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Text="ToolBox"
+                FontSize="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontWeight="Normal"
+                FontFamily="Candara"
+                Padding="20"/>
+
+            <Button x:Name="ProductsList" 
+               Grid.Row="1"
+                Margin="20,40,20,40"
+                Content="Lista towarów"
+                FontFamily="Arial"
+                Foreground="White"
+                Background="#1F468F"
+                Click="ProductsList_Click" />
+
+            <Button x:Name="ClientsList"
+                Grid.Row="2" Margin="20,40,20,40"
+                Content="Klienci"
+                FontFamily="Arial"
+                Foreground="White"
+                Background="#1F468F"
+                Click="ClientsList_Click"/>
+
+            <Button x:Name="OrdersList"
+                 Grid.Row="3"
+                Margin="20,40,20,40"
+                Content="Zamówienia"
+                FontFamily="Arial"
+                Foreground="White"
+                Background="#1F468F"
+                Click="OrdersList_Click"/>
+
+            <Button x:Name="LogOut" 
+                Grid.Row="4" Margin="20,40,20,40"
+                Content="Wyloguj"
+                FontFamily="Arial"
+                Foreground="White"
+                Background="#1F468F"
+                Click="LogOut_Click"/>
+
+            <Button x:Name="SalesStatsButton"
+                Grid.Column="1"
+                Grid.Row="1" 
+                Visibility="Collapsed"
+                Margin="100,40,100,40"
+                Content="Statystyki sprzedaży"
+                Background="#1F468F"
+                Foreground="White"
+                FontFamily="Arial"
+                Click="SalesStatsButton_Click"/>
+
+            <Button x:Name="OrderDeliveryButton"
+                Grid.Column="1"
+                Grid.Row="1"
+                Visibility="Collapsed"
+                Margin="100,40,100,40"
+                Content="Zamów dostawę"
+                Background="#1F468F"
+                Foreground="White"
+                FontFamily="Arial"
+                Click="OrderDeliveryButton_Click"/>
+
+            <Button x:Name="DeliveryListButton"
+                    Grid.Column="2"
+                    Grid.Row="2"
+                    Visibility="Collapsed"                    
+                    Margin="100,40,100,40"
+                    Content="Lista dostaw"
+                    Click="OpenDeliveryList_Click"
+                    Background="#1F468F"
+                    Foreground="White"/>
+        </Grid>
+    </Grid>
+</Window>

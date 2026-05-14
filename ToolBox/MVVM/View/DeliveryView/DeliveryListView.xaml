@@ -1,0 +1,68 @@
+﻿<Window x:Class="Praca_Inżynierska_v1.MVVM.View.DeliveryListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lista dostaw"
+        Height="500" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#EAF4FF"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        FontFamily="Arial">
+
+    <Grid>
+        <Grid Background="#1F468F" Height="40" VerticalAlignment="Top">
+            <TextBlock Text="Lista zamówień dostaw"
+                       FontSize="15"
+                       FontWeight="Normal"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="10,0"
+                       Foreground="White"/>
+        </Grid>
+
+        <Grid Margin="0,40,0,50">
+            <StackPanel Orientation="Vertical" Margin="20">
+                <Button Content="Odśwież"
+                        Width="100"
+                        HorizontalAlignment="Right"
+                        Command="{Binding RefreshCommand}"
+                        Margin="0,0,0,10"
+                        Background="#1F468F"
+                        Foreground="White"/>
+
+                <DataGrid ItemsSource="{Binding Deliveries}"
+                          SelectedItem="{Binding SelectedDelivery}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          CanUserAddRows="False"
+                          Background="White">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Dostawy" Binding="{Binding DeliveryId}" Width="100"/>
+                        <DataGridTextColumn Header="Data zamówienia" Binding="{Binding OrderDate, StringFormat=d}" Width="150"/>
+                        <DataGridTextColumn Header="Data otrzymania" Binding="{Binding ReceivedDate, StringFormat=d}" Width="150"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="150"/>
+                        <DataGridTextColumn Header="Komentarz" Binding="{Binding Comment}" Width="200"/>
+                        <DataGridTextColumn Header="Liczba pozycji" Binding="{Binding ItemCount}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+
+        <!-- Przyciski na dole -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
+            <Button Content="Wróć"
+                    Width="100"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Click="Back_ButtonClick"/>
+
+            <Button Content="Szczegóły"
+                    Width="100"
+                    Height="30"
+                    Command="{Binding ShowDetailsCommand}"
+                    IsEnabled="{Binding SelectedDelivery}"
+                    Background="#1F468F"
+                    Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>

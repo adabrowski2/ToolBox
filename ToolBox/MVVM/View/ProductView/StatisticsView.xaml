@@ -1,0 +1,133 @@
+﻿<Window x:Class="Praca_Inżynierska_v1.MVVM.View.StatisticsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Statystyki sprzedaży"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="#EAF4FF"
+        Width="1000" Height="550"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <!-- Pasek tytułowy -->
+        <Grid Background="#1F468F" Height="40" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Statystyki sprzedaży"
+                       FontSize="15"
+                       FontFamily="Arial"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"
+                       Foreground="White"/>
+        </Grid>
+
+        <!-- Zawartość -->
+        <Grid Margin="20,50,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Raport sprzedaży"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#1F468F"
+                       Margin="0,0,0,10"/>
+
+            <!-- Filtry -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Zakres dat:"
+                           FontFamily="Arial"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"/>
+                <DatePicker SelectedDate="{Binding DateFrom}"  Width="130" Margin="0,0,10,0"/>
+                <TextBlock Text="do"
+                           FontFamily="Arial"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"/>
+                <DatePicker SelectedDate="{Binding DateTo}" Width="130" Margin="0,0,10,0"/>
+                <Button Content="Filtruj"
+                        Command="{Binding FiltrujCommand}"
+                        Width="120"
+                        FontFamily="Arial"
+                        Background="#1F468F"
+                        Foreground="White"/>
+
+                <Button Content="Resetuj filtry"
+                        Command="{Binding ResetCommand}"
+                        Width="100"
+                        Margin="10,0,0,0"
+                        FontFamily="Arial"
+                        Background="Gray"
+                        Foreground="White"/>
+
+                <TextBlock Text="Produkt:"
+                       FontFamily="Arial"
+                       VerticalAlignment="Center"
+                       Margin="100,0,5,0"/>
+                <ComboBox Width="200"
+                      ItemsSource="{Binding ListaProduktow}"
+                      SelectedItem="{Binding WybranyProdukt}"
+                      FontFamily="Arial"
+                      Margin="10,0,10,0"/>
+
+            </StackPanel>
+
+            <!-- Tabela -->
+            <DataGrid x:Name="SalesDataGrid"
+                      ItemsSource="{Binding SalesResults}"
+                      Grid.Row="2"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      Background="White"
+                      HeadersVisibility="Column"
+                      FontFamily="Arial"
+                      IsReadOnly="True">
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTopProduct}" Value="True">
+                                <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nazwa" Binding="{Binding Produkt}" Width="*" />
+                    <DataGridTextColumn Header="Sprzedana ilość" Binding="{Binding Ilosc}" Width="150"/>
+                    <DataGridTextColumn Header="Wartość" Binding="{Binding Wartosc}" Width="150"/>
+                    <DataGridTextColumn Header="Cena jednostkowa" Binding="{Binding CenaJednostkowa}" Width="150"/>
+                    <DataGridTextColumn Header="Rabat (%)" Binding="{Binding Rabat}" Width="100"/>
+                    <DataGridTextColumn Header="Ilość zamówień" Binding="{Binding LiczbaZamowien}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="{Binding LacznaWartosc, StringFormat=Łączna sprzedaż: {0:N2} zł}"
+                   HorizontalAlignment="Center"
+                   Grid.Row="3"
+                   FontWeight="Bold"
+                   FontSize="16"
+                   Margin="0,10,0,0"/>
+
+            <Button Grid.Row="3"
+                    HorizontalAlignment="Left"
+                    Margin="0,10,0,0"
+                    Content="Wróć"
+                    Width="100"
+                    FontFamily="Arial"
+                    Background="LightGray"
+                    Foreground="Black"
+                    Click="BtnBack_Click"/>
+        </Grid>
+    </Grid>
+</Window>

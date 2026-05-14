@@ -1,0 +1,19 @@
+﻿<Application x:Class="Praca_Inżynierska_v1.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:helpers="clr-namespace:Praca_Inżynierska_v1.Helpers"
+             StartupUri="MVVM/View/LoginView.xaml">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Możesz dodać inne zasoby tutaj -->
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Globalny konwerter widoczności firmy -->
+            <helpers:CompanyVisibilityConverter x:Key="CompanyVisibilityConverter"/>
+            <helpers:VisibilityConverter x:Key="VisibilityConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
